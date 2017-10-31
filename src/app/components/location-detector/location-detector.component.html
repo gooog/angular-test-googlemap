@@ -1,0 +1,33 @@
+<br><br>
+  <div class="input-group">
+    <input type="text" class="form-control" #searchInput placeholder="ჩაწერეთ ადგილის დასახელება...">
+    <span class="input-group-btn">
+          <button class="btn btn-warning cursor-pointer" (click)="search(searchInput.value)">ძებნა</button>
+        </span>
+  </div>
+<br>
+<div class="row">
+  <div class="col-sm-12">
+    <table class="table" *ngIf="foundLocations">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>სახელი</th>
+        <th>გრძედი</th>
+        <th>განედი</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let location of foundLocations; let i = index">
+        <th scope="row">{{ i+1 }}</th>
+        <td>{{ location.formatted_address }}</td>
+        <td>{{ location.geometry.location.lat }}</td>
+        <td>{{ location.geometry.location.lng }}</td>
+        <td><button class="btn btn-success" (click)="onAdd(i)">დამატება</button></td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

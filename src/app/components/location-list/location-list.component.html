@@ -1,0 +1,20 @@
+<table class="table" *ngIf="myLocations">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>სახელი</th>
+    <th>გრძედი</th>
+    <th>განედი</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let location of myLocations; let i = index">
+    <th scope="row">{{ i+1 }}</th>
+    <td>{{ location.name }}</td>
+    <td>{{ location.lat }}</td>
+    <td>{{ location.lng }}</td>
+    <td><button class="btn btn-danger" (click)="onDelete(i)">წაშლა</button></td>
+  </tr>
+  </tbody>
+</table>
