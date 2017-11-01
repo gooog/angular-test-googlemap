@@ -1,12 +1,12 @@
 <br><br>
   <div class="input-group">
-    <input type="text" class="form-control" #searchInput placeholder="ჩაწერეთ ადგილის დასახელება...">
+    <input type="text" class="form-control" (keypress)="enterKeyDetect($event)" #searchInput placeholder="ჩაწერეთ ადგილის დასახელება...">
     <span class="input-group-btn">
           <button class="btn btn-warning cursor-pointer" (click)="search(searchInput.value)">ძებნა</button>
         </span>
   </div>
 <br>
-<div class="row">
+<div class="row free-position">
   <div class="col-sm-12">
     <table class="table" *ngIf="foundLocations">
       <thead>

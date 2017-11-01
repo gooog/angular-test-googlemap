@@ -5,8 +5,8 @@ import {HttpClient} from '@angular/common/http';
 export class MapService implements OnInit {
 
   locations = [
-        {name: 'Tbilisi', lat: 41.7151377, lng: 44.827096},
-        {name: 'Rustavi', lat: 41.5225612, lng: 45.0430369}
+        {name: 'Tbilisi, Georgia', lat: 41.7151377, lng: 44.827096},
+        {name: 'Rustavi, Georgia', lat: 41.5225612, lng: 45.0430369}
     ];
   locationsChange = new EventEmitter();
 

@@ -30,4 +30,10 @@ export class LocationDetectorComponent implements OnInit {
       this.searchInput.nativeElement.value = '';
     }
 
+    enterKeyDetect(event) {
+      if (event.keyCode === 13) {
+          this.search(event.target.value);
+      }
+    }
+
 }

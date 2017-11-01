@@ -1,36 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MapService} from '../../services/map.service';
-declare var google: any;
+import {MapConfig} from './map.config';
+declare const google: any;
 
 @Component({
   selector: 'app-google-map',
   templateUrl: './google-map.component.html',
   styleUrls: ['./google-map.component.css']
 })
-export class GoogleMapComponent implements OnInit {
+export class GoogleMapComponent implements OnInit, OnDestroy {
 
-  myLocations: any[];
-  mapInit = { lat: 41.7151377, lng: 44.827096 };
-  map: any;
-  markers = [];
+    myLocations: any[];
+    mapInit = MapConfig.InitCoords;
+    map: any;
+    markers = [];
+    subscription: any;
 
-  constructor(private mapService: MapService) { }
+    constructor(private mapService: MapService) { }
 
-  ngOnInit() {
+    ngOnInit() {
     this.myLocations = this.mapService.locations;
-    console.log(this.myLocations);
-
-    setTimeout( () => {
-        this.initMap();
-        this.makeMarkers();
-    }, 3000);
 
     this.mapService.locationsChange.subscribe(() => {
        this.makeMarkers();
     });
-  }
 
-  makeMarkers() {
+    this. loadScript();
+    }
+
+    ngOnDestroy() {
+      this.subscription.unsubscribe();
+    }
+
+    makeMarkers() {
       this.clearMarkers();
       this.myLocations = this.mapService.locations;
       this.myLocations.forEach( (location) => {
@@ -40,25 +42,35 @@ export class GoogleMapComponent implements OnInit {
           this.markers.push(marker);
           this.setMarkers(this.map);
       });
+    }
 
-      console.log('makePins called!');
-  }
-
-  clearMarkers() {
+    clearMarkers() {
       this.setMarkers(null);
-  }
+      this.markers = [];
+    }
 
-  setMarkers(map) {
+    setMarkers(map) {
       this.markers.forEach((marker) => {
          marker.setMap(map);
       });
-  }
+    }
 
     initMap() {
         const uluru = {lat: this.mapInit.lat, lng: this.mapInit.lng};
         this.map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 8,
+            zoom: 6,
             center: uluru
+        });
+    }
+
+    loadScript() {
+        const node = document.createElement('script');
+        node.src = MapConfig.GOOGLE_MAPS_API_URL + MapConfig.GOOGLE_MAPS_API_KEY;
+        node.id = 'googleMapsAPI';
+        document.getElementsByTagName('head')[0].appendChild(node);
+        node.addEventListener('load', () => {
+            this.initMap();
+            this.makeMarkers();
         });
     }
 
