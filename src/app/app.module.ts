@@ -6,7 +6,7 @@ import { GoogleMapComponent } from './components/google-map/google-map.component
 import { LocationDetectorComponent } from './components/location-detector/location-detector.component';
 import { LocationListComponent } from './components/location-list/location-list.component';
 import {MapService} from './services/map.service';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
