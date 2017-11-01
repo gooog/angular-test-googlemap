@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AgmCoreModule } from '@agm/core';
 
 import { AppComponent } from './app.component';
 import { GoogleMapComponent } from './components/google-map/google-map.component';
@@ -18,10 +17,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
-    AgmCoreModule.forRoot({
-        apiKey: 'AIzaSyBI2qfEHOHhY0hfqTzSC_qs1a4LomhVmTI'
-    })
+    HttpClientModule
   ],
   providers: [MapService],
   bootstrap: [AppComponent]
